@@ -1,0 +1,23 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <label>Name:</label>
+      <input type="text" ng-model="name" />
+      <br/>
+      <label>Country:</label>
+      <select ng-model="country" ng-init="countries=['Canada', 'Germany', 'Iran']">
+        <option ng-repeat="x in countries" value={{x}} >{{x}}</option>     
+      </select>
+      <br/>
+      <label>Year:</label>
+      <input type="text" ng-model="year" />
+      <hr>
+      <h1>I am {{name}} from {{country}} and born in {{year}}!</h1>
+      
+    </div>
+  </body>
+</html>
