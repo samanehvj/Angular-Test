@@ -1,0 +1,62 @@
+<!doctype html>
+<html >
+  <head>
+  </head>
+  <body>
+    <div ng-app="my-app" ng-controller="my-controller">
+        <form name="myForm">
+      <label>First Name:</label>
+      <input ng-change="checkValid()" type="text" ng-model="fname" name="fname" required />
+      <br/>
+      <label>Last Name:</label>
+      <input ng-change="checkValid()" type="text" ng-model="lname" name="lname" required />
+      <br/>
+      <label>Email:</label>
+      <input  ng-change="checkValid()" type="email" ng-model="email" name="email" required />
+      <br/>
+      <label>List of Country:</label>
+      <select ng-change="checkValid()" ng-model="country" name="country" required>
+        <option ng-repeat="x in countries" value={{x}} >{{x}}</option>     
+      </select>
+      <br/>
+      <label>Birth Year:</label>
+      <input ng-change="checkValid()" type="number" ng-model="year" name="year" required/>
+      </form>
+      <hr>
+      <h1 ng-show="!validForm">Please fill out the form correctly</h1>
+      <h1 ng-show="validForm">
+         My name is {{fname}} {{lname}}. from {{country}} and I am  {{age}} years old!
+          <br>
+          My email is: {{email}}
+
+      </h1>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+        var app = angular.module("my-app", []);
+
+        app.controller("my-controller", function($scope){
+            $scope.validForm = false;
+            $scope.age = 0;
+            $scope.countries=['Canada', 'Germany', 'Iran'];
+
+            $scope.checkValid = function() {
+                // console.log($scope.myForm.fname.$valid);
+                if($scope.myForm.fname.$valid 
+                    && $scope.myForm.lname.$valid
+                    && $scope.myForm.email.$valid
+                    && $scope.myForm.country.$valid
+                    && $scope.myForm.year.$valid
+                ) {
+                    $scope.validForm = true;
+                    var d = new Date();
+                    $scope.age =  d.getFullYear() - $scope.year ;
+                }   
+            } 
+
+        });
+    </script>
+
+  </body>
+</html>
